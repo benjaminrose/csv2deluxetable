@@ -8,23 +8,29 @@
     Licesed under the MIT License
 '''
 import numpy as np
-
-# Read in csv file
-data = np.array([['x', 'y', 'z'],
-        [1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9]]
-        )
+from astropy.table import Table
 
 
+#### Read in csv file ####
+#todo(test with complex and simple csv files)
+
+#title is that last line, a footer comment
+#first comment line is main header columns
+#other comment lines will be added as secondary headers, like units
+t = Table.read('data.csv', format='ascii')
+colhead = t.colnames
+title = t.meta['comments'][-1]
+units = t.meta['comments'][:-1][0]
+units = units.split(', ')    #add space here to remove it from the array
+data = np.array(t)
 # determin number of columns
-colNum = data.shape[1]
+colNum = len(t.colnames)
 
 
-# ask for user changinging setting (tabletypesize, or more)
+#### ask for user changinging setting (tabletypesize, or more) ####
 
 
-# make table meta
+#### make table meta ####
 #double "{" for each single set requred for latex, cuase python format
 #keep raw text to help with '\'
 style = 'c'*colNum
@@ -34,16 +40,25 @@ tableMeta = r'''\begin{{deluxtable}}{{{}}}
 \tabletypesize{{\small}}
 \tablewidth{{0pt}}
 %add in your table title and label
-\tablecaption{{ \label{{tab:1}} }}
-'''.format(style, colNum)
+\tablecaption{{{} \label{{tab:1}} }}
+'''.format(style, colNum, title)
 
-# make table head
+
+#### make table head ####
 header = ''
-#todo(update for multiple header lines, look at design of `inside`)
-for i in data[0]:
+#itterate over colhead
+for i in colhead:
     header = header + '\colhdead{' + str(i) + '} & '
 # remove last '&' and add a new line at the end of a row
 header = header[:-2] + r' \\ ' +'\n'
+#iterate over units
+#todo(what if units has multiple columns)
+header += '    '     #tab in units line
+for i in units:
+    header += '\colhdead{' + str(i) + '} & '
+# remove last '&' and add a new line at the end of a row
+header = header[:-2] + r' \\ ' +'\n'
+
 # remove last newline at the end of the header
 header = header[:-1]
 
@@ -54,8 +69,10 @@ tableHead = r'''\tablehead{{
 
 # make data block
 #todo(add in handleing for \nodata)
+
 inside = ''
-for i in data[1:]:
+# for i in data[1:]:
+for i in data:
     for j in i:
         inside = inside + str(j)
         inside += ' & '
