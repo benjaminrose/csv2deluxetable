@@ -1,4 +1,4 @@
-''' csv2deluxetable.py -- a script to convert a csv file to an AAS delux table
+''' csv2deluxetable.py -- a script to convert a csv file to an AAS deluxe table
 
     Benjamin Rose
     benjamin.rose@me.com
@@ -7,8 +7,21 @@
     2016-06-17
     Licesed under the MIT License
 '''
+import argparse
+
 import numpy as np
 from astropy.table import Table
+
+
+#### Parese arguments ####
+parser = argparse.ArgumentParser(prog='csv2deluxtable', 
+        description='''A script to convert a csv file to an AAS deluxe table.
+        Source is aviable at github.com/benjaminrose/csv2deluxetable.
+        ''')
+parser.add_argument('input', help="what csv file do you want to convert")
+parser.add_argument("-o", "--output", help="the output file name")
+parser.add_argument('--version', action='version', version='%(prog)s 0.1')
+args = parser.parse_args()
 
 
 #### Read in csv file ####
@@ -17,7 +30,7 @@ from astropy.table import Table
 #title is that last line, a footer comment
 #first comment line is main header columns
 #other comment lines will be added as secondary headers, like units
-t = Table.read('data.csv', format='ascii')
+t = Table.read(args.input, format='ascii')
 colhead = t.colnames
 title = t.meta['comments'][-1]
 units = t.meta['comments'][:-1][0]
@@ -39,9 +52,8 @@ tableMeta = r'''\begin{{deluxtable}}{{{}}}
 \tablecolumns{{{}}}
 \tabletypesize{{\small}}
 \tablewidth{{0pt}}
-%add in your table title and label
-\tablecaption{{{} \label{{tab:1}} }}
-'''.format(style, colNum, title)
+\tablecaption{{{} \label{{tab:{}}} }}
+'''.format(style, colNum, title, args.input[:-4])
 
 
 #### make table head ####
