@@ -19,9 +19,10 @@ parser = argparse.ArgumentParser(prog='csv2deluxtable',
         Source is aviable at github.com/benjaminrose/csv2deluxetable.
         ''')
 parser.add_argument('input', help="what csv file do you want to convert")
-parser.add_argument("-o", "--output", help="the output file name")
+parser.add_argument('-o', '--output', help='the output file name, defaults to stand out')
 parser.add_argument('--version', action='version', version='%(prog)s 0.1')
 args = parser.parse_args()
+#todo(get it so the help menu usage is more obvious that `csv2deluxtable input -o OUTPUT` is acceptable.)
 
 
 #### Read in csv file ####
@@ -109,7 +110,12 @@ tableFooter = r'''
 
 # save file
 table = tableMeta+tableHead+tableData+tableFooter
-print table
+if args.output:
+    with open(args.output, 'w') as text_file:
+        text_file.write(table)
+else:
+    print table
+
 """
 table = r'''\begin{deluxetable}{ccc|ccc|c}
 \tablecolumns{7}
