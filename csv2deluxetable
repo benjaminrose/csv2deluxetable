@@ -1,4 +1,4 @@
-#! /usr/local/bin/python
+#! /usr/local/bin/python3
 ''' csv2deluxetable.py -- a script to convert a csv file to an AAS deluxe table
 
     Benjamin Rose
