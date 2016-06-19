@@ -1,3 +1,4 @@
+#! /usr/local/bin/python
 ''' csv2deluxetable.py -- a script to convert a csv file to an AAS deluxe table
 
     Benjamin Rose
@@ -114,7 +115,7 @@ if args.output:
     with open(args.output, 'w') as text_file:
         text_file.write(table)
 else:
-    print table
+    print(table)
 
 """
 table = r'''\begin{deluxetable}{ccc|ccc|c}
