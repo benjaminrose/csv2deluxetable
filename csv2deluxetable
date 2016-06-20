@@ -34,9 +34,14 @@ args = parser.parse_args()
 #other comment lines will be added as secondary headers, like units
 t = Table.read(args.input, format='ascii')
 colhead = t.colnames
-title = t.meta['comments'][-1]
-units = t.meta['comments'][:-1][0]
-units = units.split(', ')    #add space here to remove it from the array
+try:
+    title = t.meta['comments'][-1]
+    units = t.meta['comments'][:-1][0]
+    units = units.split(', ')    #add space here to remove it from the array
+except KeyError as e:
+    # set defualts if titles and units are not given.
+    title = ''
+    units = None
 data = np.array(t)
 # determin number of columns
 colNum = len(t.colnames)
@@ -50,11 +55,12 @@ colNum = len(t.colnames)
 #keep raw text to help with '\'
 style = 'c'*colNum
 
+#todo(update so latex label takes the output file name over the input file name)
 tableMeta = r'''\begin{{deluxtable}}{{{}}}
 \tablecolumns{{{}}}
 \tabletypesize{{\small}}
 \tablewidth{{0pt}}
-\tablecaption{{{} \label{{tab:{}}} }}
+\tablecaption{{{} \label{{tab:{}}}}}
 '''.format(style, colNum, title, args.input[:-4])
 
 
@@ -63,15 +69,16 @@ header = ''
 #itterate over colhead
 for i in colhead:
     header = header + '\colhdead{' + str(i) + '} & '
-# remove last '&' and add a new line at the end of a row
-header = header[:-2] + r' \\ ' +'\n'
 #iterate over units
 #todo(what if units has multiple columns)
-header += '    '     #tab in units line
-for i in units:
-    header += '\colhdead{' + str(i) + '} & '
+if units:
+    # remove last '&' and add a new line (tex and unicode) at the end of a row
+    header = header[:-2] + r' \\ ' +'\n'
+    header += '    '     #tab in units line
+    for i in units:
+        header += '\colhdead{' + str(i) + '} & '
 # remove last '&' and add a new line at the end of a row
-header = header[:-2] + r' \\ ' +'\n'
+header = header[:-2] +'\n'
 
 # remove last newline at the end of the header
 header = header[:-1]
