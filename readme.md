@@ -26,15 +26,28 @@ to specify the output file. This repository comes with a `csv` file that you can
 
 ## CVS format
 
+An example of several working csv options are available in this repository. Here is one sample. 
+
+```
+# x, y, z
+# degree, minute, second
+1, 2, 3
+4, 5, 6
+7, 8, 9
+10, 11, 12
+# This is the title of the csv file
+```
+All non-data rows need to start with `#`. Row one is the data column name. Row two is the units. Both of these will end up in the deluxetable `\tablehead{}` tag The final row is the table title or caption. This will end up in the deluxetable `\tablecaption{}` tag.
+
 More details of the format of the csv to come.
 
 ## Deluxtable settings
 
-Currently you can not change the settings of the deluxtable with the script.
+Currently you cannot change the settings of the deluxtable with the script. An option I am considering is being able to adjust the `\label{}` tag via an optional flag.
 
 ## Contributing
 
-I need to set a standard for this. I'll likely copy Astropy's. 
+I need to set a standard for this. I'll likely copy Astropy's. For now, I am open for ideas and comments. This is my personal script, so I will have final say on what stylistic changes are made. If you disagree with me, please fork this repo and have fun!
 
 I am also doing to take on the [Astropy Code of Conduct](http://www.astropy.org/about.html#codeofconduct) for contributing to this repository. 
 
