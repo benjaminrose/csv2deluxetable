@@ -123,24 +123,3 @@ if args.output:
         text_file.write(table)
 else:
     print(table)
-
-"""
-table = r'''\begin{deluxetable}{ccc|ccc|c}
-\tablecolumns{7}
-\tabletypesize{\small}
-\tablewidth{0pt}
-\tablecaption{Summary of \sn{} and their host galaxies. \label{tab:data}} %really a title
-\tablehead{
-    \colhead{SDSS SN ID} & \colhead{x} & \colhead{y} & \colhead{a}\tablenotemark{a} & \colhead{b}\tablenotemark{a}  & \colhead{theta} & \colhead{cut}\tablenotemark{b} \\
-    \colhead{} & \colhead{} & \colhead{} & \colhead{} & \colhead{}  & \colhead{(radians)} & \colhead{}
-    }
-    
-\startdata
-SN6491  & x & y & a & b & theta & o \\
-SN13038 & x & y & a & b & theta & lsb \\
-\enddata
-
-\tablenotetext{a}{Something about Source Extactor's scalling.}
-\tablenotetext{b}{o - extra object in field of view, lsb - the host was not detected with HST because it was a low surface brightness}
-\end{deluxetable}'''
-"""

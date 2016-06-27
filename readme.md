@@ -47,7 +47,7 @@ Currently you cannot change the settings of the deluxtable with the script. An o
 
 ## Contributing
 
-I need to set a standard for this. I'll likely copy Astropy's. For now, I am open for ideas and comments. This is my personal script, so I will have final say on what stylistic changes are made. If you disagree with me, please fork this repo and have fun!
+I need to set a standard for this. I'll likely copy Astropy's. For now, I am open for ideas and comments, but this is my personal script, so I will have final say on what stylistic changes are made. If you disagree with me, please fork this repo and have fun!
 
 I am also doing to take on the [Astropy Code of Conduct](http://www.astropy.org/about.html#codeofconduct) for contributing to this repository. 
 
