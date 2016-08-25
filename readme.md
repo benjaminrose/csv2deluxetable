@@ -37,7 +37,7 @@ An example of several working csv options are available in this repository. Here
 10, 11, 12
 # This is the title of the csv file
 ```
-All non-data rows need to start with `#`. Row one is the data column name. Row two is the units. Both of these will end up in the deluxetable `\tablehead{}` tag The final row is the table title or caption. This will end up in the deluxetable `\tablecaption{}` tag.
+All non-data rows need to start with `#`. Row one is the data column name. Row two is the units. Both of these will end up in the deluxetable `\tablehead{}` tag. The final row is the table title or caption. This will end up in the deluxetable `\tablecaption{}` tag.
 
 More details of the format of the csv to come.
 
