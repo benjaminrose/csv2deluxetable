@@ -4,37 +4,12 @@ layout: default
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    {% if page.link %}
-        <h1 class="post-title" itemprop="name headline">{{ page.title }}
-            <a href="{{ page.link }}" rel="bookmark" title="External Link"> ➡</a>
-        </h1>
-    {% else %}
-        <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
-    {% endif %}
-    {% if page.category %}<p class="post-meta"> <br>{% endif %}
-    <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%Y-%m-%d" }}</time> 
-    {% if page.category %}• 📁 <a href="/archive/#{{page.category | url_encode}}" title="Category Archive">{{page.category | capitalize}}</a> {% endif %}
-    <!--• 🏷 {{page.tags | array_to_sentence_string }} --> 
-    {% if page.author %}• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
-    <!-- <p class="post-mta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p> -->
+    <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
+    <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
   </header>
-
-
 
   <div class="post-content" itemprop="articleBody">
     {{ content }}
   </div>
 
 </article>
-
-
-<div class='page-nav'>
-  <!-- if the next/newer page existes -->
-  {% if page.next.title %}
-    <a rel="left" class="left" href="{{ page.next.url | prepend: site.baseurl }}">← Newer</a>
-  {% endif %}
-  <!-- if the previous/older page existes -->
-  {% if page.previous.title %}
-    <a rel="right" class="right" href="{{ page.previous.url | prepend: site.baseurl }}">Older →</a>
-  {% endif %}
-</div>
