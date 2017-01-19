@@ -56,7 +56,7 @@ colNum = len(t.colnames)
 style = 'c'*colNum
 
 #todo(update so latex label takes the output file name over the input file name)
-tableMeta = r'''\begin{{deluxtable}}{{{}}}
+tableMeta = r'''\begin{{deluxetable}}{{{}}}
 \tablecolumns{{{}}}
 \tabletypesize{{\small}}
 \tablewidth{{0pt}}
